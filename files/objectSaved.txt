@@ -1,0 +1,8 @@
+[{"nombre":"pepitos","id":0,"img":"https://jumboargentina.vtexassets.com/arquivos/ids/673956/Galletitas-Pepitos-X357g-1-858781.jpg?v=637711293988100000"},
+{"nombre":"merengadas","id":1,"img":"https://http2.mlstatic.com/D_NQ_NP_838451-MLA45241086251_032021-O.jpg"},
+{"nombre":"Galletas de miel","id":2,"img":"https://www.distribuidoraelgalponcito.com.ar/wp-content/uploads/2020/05/miel_valido-300x300.png"},
+{"nombre":"Sanguches","id":3,"img":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fsp.depositphotos.com%2F4778575%2Fstock-photo-selection-of-take-away-sandwiches.html&psig=AOvVaw1W_QUfQFh9Tc0FXQun8CyD&ust=1636569531277000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMDh9eP2i_QCFQAAAAAdAAAAABAQ"},
+{"nombre":"Galletas de coco","id":4,"img":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hiperlibertad.com.ar%2Fgalletas-rosquita-coco-tostex-x-300g%2Fp&psig=AOvVaw0PxQe2kN5wF0uiEYM_WttC&ust=1636569393707000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNiC5J_2i_QCFQAAAAAdAAAAABAR"},
+{"nombre":"pan","id":5,"img":"https://m.media-amazon.com/images/I/61mhYSJZNGL._AC_SY355_.jpg"},{"nombre":"chocolatada","id":6,"img":"https://www.modomarket.com/29356-large_default/leche-chocolatada-cindor-x-1-lt.jpg"},
+{"nombre":"te","id":7,"img":"https://www.clubmarket.com.ar/wp-content/uploads/te-x100-la-virginia.jpg"},
+{"nombre":"leche","id":8,"img":"https://www.casa-segal.com/wp-content/uploads/2019/07/leche-entera-ilolay-1-litro-almacen-casa-segal-mendoza-600x600.jpg"}]
