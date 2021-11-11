@@ -35,14 +35,16 @@ app.get('/productos',(req, res)=>{
     })
 });
 
-app.get('/productoRandom',async(req, res)=>{
-    const idRandom=5;
-    let datos = await manager.getById(idRandom);
-    if (datos.status === 'success') {
-        res.send(datos.playload)
-    }else{
-        res.send('Ese producto no se encuentra, lo siento')
-    }
+app.get('/productoRandom',(req, res)=>{
+    const idRandom=Number(8);
+    manager.getById(idRandom).then((result=>{
+
+        if (result.status === 'success') {
+            res.send(result.playload)
+        }else{
+            res.send('Ese producto no se encuentra, lo siento')
+        }
+    }))
 });
 
 
