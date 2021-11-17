@@ -1,16 +1,27 @@
 const express = require('express');
-const Contenedor = require('./class/manager');
-
-
+const cors= require('cors');
 const app= express();
+
 
 const PORT = 8080;
 //8080,8081,3000,3001----process.env.port
 
-let contador=0;
 
 
+const Contenedor = require('./class/manager');
 const manager = new Contenedor();
+
+/*CONECTO RUTAS */
+const productRouter = require('./routes/products');
+
+/*LE DIGO QUE USE LAS RUTAS */
+app.use('/api/products', productRouter);
+
+
+/*PARA EL METODO POST, DEBO CONFIGURAR QUE RECIBE MI APP*/
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cors());
 
 
 const server = app.listen( PORT, ()=>{
@@ -21,42 +32,5 @@ server.on('error', (error)=> console.log('Algo no esta bien... error: '+error))
 
 
 
-app.get('/',(req, res)=>{
-    res.send('<h1>ESTA PÁGINA ES EL HOME<h1>')
-});
-
-app.get('/productos',(req, res)=>{
-    manager.getAll().then(result =>{
-        if (result.statuss==='success') {
-            res.status(200).send(result.playload);  
-        }else{
-            res.status(404).send(result.message);
-        }
-    })
-});
-
-app.get('/productoRandom',(req, res)=>{
-    const idRandom=Number(8);
-    manager.getById(idRandom).then((result=>{
-
-        if (result.status === 'success') {
-            res.send(result.playload)
-        }else{
-            res.send('Ese producto no se encuentra, lo siento')
-        }
-    }))
-});
 
 
-
-
-app.get('/products/:pid', async (req, res)=>{
-    const productId = Number(req.params.pid);
-    console.log(productId)
-    let datos = await manager.getById(productId);
-    if (datos.status === 'success') {
-        res.send(datos.playload)
-    }else{
-        res.send('Ese producto no se encuentra, lo siento')
-    }
-})
