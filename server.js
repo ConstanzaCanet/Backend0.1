@@ -7,6 +7,9 @@ const PORT = 8080;
 //8080,8081,3000,3001----process.env.port
 
 
+const server = app.listen( PORT, ()=>{
+    console.log(`Servidor escuchando en el puerto ${PORT}`)
+});
 
 const Contenedor = require('./class/manager');
 const manager = new Contenedor();
@@ -24,9 +27,6 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
 
-const server = app.listen( PORT, ()=>{
-    console.log(`Servidor escuchando en el puerto ${PORT}`)
-});
 
 server.on('error', (error)=> console.log('Algo no esta bien... error: '+error))
 
