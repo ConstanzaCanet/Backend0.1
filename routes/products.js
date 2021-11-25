@@ -1,6 +1,4 @@
 import express from 'express';
-import cors from 'cors';
-import multer from 'multer';
 import upload from '../services/upload.js';
 import Contenedor from '../class/manager.js';
 
