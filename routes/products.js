@@ -1,6 +1,11 @@
-const express = require ('express');
+import express from 'express';
+import cors from 'cors';
+import multer from 'multer';
+import upload from '../services/upload.js';
+import Contenedor from '../class/manager.js';
+
 const router =express.Router();
-const Contenedor =require('../class/manager');
+
 const manager = new Contenedor();
 
 /*GET */
@@ -38,9 +43,13 @@ router.get('/productoRandom',(req, res)=>{
 
 /*POST*/
 
-router.post('/', (req, res)=>{
-    let body = req.body;
-    manager.addObject(body).then(result=>{
+router.post('/', upload.single('image'),(req, res)=>{
+    let file = req.file;
+    let product = req.body;
+    product.price= parseInt(product.price)
+    product.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/images/'+file.filename;
+    console.log(product)
+    manager.addObject(product).then(result=>{
         res.send(result)
     })
 })
@@ -66,4 +75,4 @@ router.delete('/:pid',(req, res)=>{
 
 
 
-module.exports = router;
+export default router;

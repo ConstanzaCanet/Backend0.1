@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 let ide=0;
 /*Creo la clase contenedor que va a servir para la creacion del archivo que yo quiera */
@@ -90,16 +90,17 @@ class Contenedor{
     }
     
     /*Creo una funcion que agregue objeto */
-    async addObject(nuevo){
+    async addObject(body){
         try{
         let data = await fs.promises.readFile('./files/objectSaved.txt','utf-8')
         let objeticosA = JSON.parse(data);
-        let id= objeticosA[objeticosA.length].id+1;
-        if(objeticosA.some(element => element.nombre === nuevo)){//Si existe
+        let arrayN = Number(objeticosA.length)
+        let id= arrayN;
+        if(objeticosA.some(element => element.nombre === body)){//Si existe
             return {satatus:'error', message: "No, no, ese producto ya esta!"}
         }else{//Si no existe
-            nuevo = Object.assign({id:id, nuevo})
-            const objeticosN=[...objeticosA, nuevo];
+            body = Object.assign({id:id, body})
+            const objeticosN=[...objeticosA, body];
         try{
         await fs.promises.writeFile('./files/objectSaved.txt',JSON.stringify(objeticosN));
         return {status:"success",message:"Exelente, agregado"}
@@ -109,9 +110,9 @@ class Contenedor{
         }
         }catch{
         //El archivo no existe, entonces hay que crearlo.
-        let nuevo = Object.assign({id:id, nuevo})
+        let body = Object.assign({id:id, body})
         try{
-        await fs.promises.writeFile('./files/objectSaved.txt',JSON.stringify([nuevo],null,2))
+        await fs.promises.writeFile('./files/objectSaved.txt',JSON.stringify([body],null,2))
         return {status:"success",message:"creado con éxito"}
         }catch(error){
         return {status:"error",message:"No se pudo crear: "+error}
@@ -166,4 +167,4 @@ class Contenedor{
 
 
 
-module.exports = Contenedor;
+export default Contenedor;
