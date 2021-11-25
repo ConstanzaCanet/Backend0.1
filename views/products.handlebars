@@ -1,9 +1,22 @@
 <div class="product-container">
     {{#each list}}
-    <div class="product-card">
-        <p>{{this.body.name}}</p>
-        <p>{{this.body.price}}</p>
-        <img src={{this.body.thumbnail}}>
+
+    <div class="a-box">
+        <div class="img-container">
+          <div class="img-inner">
+            <div class="inner-skew">
+              <img src={{this.body.thumbnail}}>
+            </div>
+          </div>
+        </div>
+        <div class="text-container">
+          <h3>{{this.body.name}}</h3>
+          <div>
+            This a demo experiment to skew image container. It looks good.
+        </div>
+        <p>precio: $ {{this.body.price}}</p>
+        <button class="button">Comprar</button>
     </div>
+
     {{/each}}
 </div>

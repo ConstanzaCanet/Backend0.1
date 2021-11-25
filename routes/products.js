@@ -43,6 +43,7 @@ router.get('/productoRandom',(req, res)=>{
 
 router.post('/', upload.single('image'),(req, res)=>{
     let file = req.file;
+    console.log(file)
     let product = req.body;
     product.price= parseInt(product.price)
     product.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/images/'+file.filename;

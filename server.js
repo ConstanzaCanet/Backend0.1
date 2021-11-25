@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
 import upload from './services/upload.js';
 import { engine } from 'express-handlebars';
 import productRouter from './routes/products.js';
