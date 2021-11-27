@@ -42,6 +42,7 @@ router.get('/productoRandom',(req, res)=>{
 /*POST*/
 
 router.post('/', upload.single('image'),(req, res)=>{
+
     let file = req.file;
     console.log(file)
     let product = req.body;

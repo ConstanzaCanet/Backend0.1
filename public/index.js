@@ -1,4 +1,4 @@
-document.addEventListener('submit', event=>{
+document.addEventListener('submit', function (event) {
     event.preventDefault();
     let form=document.getElementById('productForm');
     let data = new FormData(form);

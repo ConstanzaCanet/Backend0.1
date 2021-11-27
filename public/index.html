@@ -10,15 +10,15 @@
 </head>
 <body>
     <div class="form-container mt-4">
-        <form id='productForm' name="productForm" class="form">
+        <form id='productForm' name="productForm" enctype="multipart/form-data" class="form">
             <h3>PRODUCTO NUEVO</h3>
             <label for="name">Nombre</label>
-            <input class="form-control form-control-lg" type="text" placeholder="name" name="name" id="name">
+            <input class="form-control form-control-lg" type="text" placeholder="name" name="name">
             <label for="price">Precio</label>
-            <input class="form-control form-control-lg" type="number" placeholder="price" name="price" id="price">
+            <input class="form-control form-control-lg" type="number" placeholder="price" name="price">
             <div>
                 <label for="formFileLg" class="form-label">Large file input example</label>
-                <input class="form-control form-control-lg" type="file">
+                <input class="form-control form-control-lg" name="file" type="file">
               </div>
               <input type="submit" class="submit-button">
         </form>
