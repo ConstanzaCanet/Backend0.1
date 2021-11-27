@@ -47,7 +47,7 @@ router.post('/', upload.single('image'),(req, res)=>{
     console.log(file)
     let product = req.body;
     product.price= parseInt(product.price)
-    product.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/images/'+file.filename;
+    product.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/img/'+file.filename;
     console.log(product)
     manager.addObject(product).then(result=>{
         res.send(result)

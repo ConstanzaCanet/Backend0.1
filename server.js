@@ -57,11 +57,6 @@ app.post('/api/uploadfile', upload.single('image'),(req,res)=>{
 })
 
 
-const simuloApi=()=> [
-    {id:1, name: "galletitas de miel", price:123,  img:"https://www.distribuidoraelgalponcito.com.ar/wp-content/uploads/2020/05/miel_valido-300x300.png"},
-    {id:2, name:"leche", price:80, img:"https://www.soyvisual.org/sites/default/files/styles/facebook_og/public/images/photos/beb_0025.jpg?itok=dhUJeaAo"}
-]
-
 app.get('/',(req, res)=>{
     let products = simuloApi();
     let renderObj={
