@@ -1,7 +1,7 @@
 import express from 'express';
 import upload from '../services/upload.js';
 import Contenedor from '../class/manager.js';
-
+import {io} from '../server.js'
 const router =express.Router();
 
 const manager = new Contenedor();
@@ -27,19 +27,8 @@ router.get('/:pid', async (req, res)=>{
     }
 });
 
-router.get('/productoRandom',(req, res)=>{
-    const idRandom=Number(8);
-    manager.getById(idRandom).then((result=>{
 
-        if (result.status === 'success') {
-            res.send(result.playload)
-        }else{
-            res.send('Ese producto no se encuentra, lo siento')
-        }
-    }))
-});
-
-/*POST*/
+/*POST---> con socket conecto la funcion de socket y con emit llamo el evento establecido en index.js*/
 
 router.post('/', upload.single('image'),(req, res)=>{
 
@@ -48,9 +37,14 @@ router.post('/', upload.single('image'),(req, res)=>{
     let product = req.body;
     product.price= parseInt(product.price)
     product.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/img/'+file.filename;
-    console.log(product)
+    console.log(JSON.stringify(product))
     manager.addObject(product).then(result=>{
-        res.send(result)
+        res.send(result);
+        if (result.status=== 'success') {
+            manager.getAll().then(result=>{
+                io.emit('updateProduct', result);
+            })
+        }
     })
 })
 
