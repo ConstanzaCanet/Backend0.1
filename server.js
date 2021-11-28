@@ -4,6 +4,7 @@ import upload from './services/upload.js';
 import { engine } from 'express-handlebars';
 import productRouter from './routes/products.js';
 import Contenedor from './class/manager.js';
+import {Server} from 'socket.io';
 
 const manager=new Contenedor();
 
@@ -17,7 +18,23 @@ const server = app.listen( PORT, ()=>{
 });
 
 
+/*Socket*/
+const io= new Server(server);
+let message=[];
+app.use(express.static(__dirname+'/public'));
 
+
+socket.on('connection',socket=>{
+    console.log('se conecto alguien');
+    socket.emit('Welcome','BIENVENIDO AL SERVIDOR');
+
+    socket.on('message',data=>{
+        message.push(data)
+        io.emit('log',message);
+    })
+});
+
+/*Vistas */
 app.engine('handlebars',engine())
 app.set('views','./views')
 app.set('view engine','handlebars')
@@ -34,7 +51,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors());
 app.use(express.static('public'))
 
-/*Handlebars */
+/*Vistas de Handlebars--->  traigo plantilla con data */
 
 app.get('/views/products',(req, res)=>{
     manager.getAll().then(result=>{

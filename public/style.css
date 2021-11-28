@@ -1,11 +1,9 @@
 .product-container {
-    text-align: center;
-    padding: 30px;
     background: #f8f4f2;
     font-family: Arial;
   }
 .a-box {
-    display: inline-block;
+
     width: 240px;
     text-align: center;
     margin-top: 3rem;
