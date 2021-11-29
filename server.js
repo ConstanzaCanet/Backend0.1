@@ -92,6 +92,8 @@ io.on('connection',async socket=>{
 /* Socket ChatComents*/
 
 io.on('connection',socket=>{
+    socket.emit("messagelog",comentarios);
+    
     socket.on('message',data=>{
         comentarios.push({id:socket.id,time:fechaActual,message:data})
         io.emit('messagelog',comentarios)

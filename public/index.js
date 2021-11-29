@@ -18,27 +18,45 @@ socket.on('updateProduct', data=>{
 
 let textarea= document.getElementById('chatComents');
 let user= document.getElementById('user');
+let email = document.getElementById('userEmail')
+
+/*funcion para valiacion de email*/
+function validarEmail(em){
+    var expReg= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    var esValido= expReg.test(em);
+    return esValido;
+}
+
+/*Funcion para enviar comentarios, con validaciones incluidas */
 textarea.addEventListener('keyup',(e)=>{
     if (e.key==='Enter') {    
         if (e.target.value) {
-            socket.emit('message',{user:user.value, message:e.target.value})
+            if (user.value==='') {
+                return alert('Lo siento falta tu usuario para comentar eso!')
+            }
+            else if(email.value===''){
+                return alert('Lo siento falta el email!')
+            }
+            else if (validarEmail(email.value)!= true) {
+                return alert('Lo siento ese email ese email esta raro! Porfavor cambialo')
+            }
+            else if (textarea.value.trim()==='') {
+                return alert('Lo siento ese mensaje es muy pequeño, porfavor comenta mas')
+            }
+            else{
+                socket.emit('message',{user:user.value, message:e.target.value})
+            }
         }    
     }
 });
 
 socket.on('messagelog',data=>{
     let com= document.getElementById('Coments');
-    com.innerHTML=`${data[0].message.user} dijo: ${data[0].message.message}`
-})
 
-socket.on('coments',data=>{
-
-    let mensajes= data.map(message=>{
-        return `<div><span>${message.user} dice: ${message.message}</span></div>`
+    let comenTario=data.map(m=>{
+        return `<div><span>${m.message.user} dice: ${m.message.message}</span><br/><p>${m.time}</p></div>`
     }).join('');
-    console.log(data)
-    p.innerHTML = JSON.stringify(data);
-    div.appendChild(p)
+    com.innerHTML=comenTario;
 })
 
 
