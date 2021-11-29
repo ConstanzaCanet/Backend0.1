@@ -1,6 +1,6 @@
 //Socket client
 const socket = io();
-//Socket events--->trayendo productos
+//Socket events--->trayendo productos en tiempo real
 socket.on('updateProduct', data=>{
     let products = data.playload;
     fetch('templates/productsTable.handlebars').then(string=>string.text()).then(template=>{
@@ -14,7 +14,38 @@ socket.on('updateProduct', data=>{
     })
 })
 
+/*Comentarios */
 
+let textarea= document.getElementById('chatComents');
+let user= document.getElementById('user');
+textarea.addEventListener('keyup',(e)=>{
+    if (e.key==='Enter') {    
+        if (e.target.value) {
+            socket.emit('message',{user:user.value, message:e.target.value})
+        }    
+    }
+});
+
+socket.on('messagelog',data=>{
+    let com= document.getElementById('Coments');
+    com.innerHTML=`${data[0].message.user} dijo: ${data[0].message.message}`
+})
+
+socket.on('coments',data=>{
+
+    let mensajes= data.map(message=>{
+        return `<div><span>${message.user} dice: ${message.message}</span></div>`
+    }).join('');
+    console.log(data)
+    p.innerHTML = JSON.stringify(data);
+    div.appendChild(p)
+})
+
+
+
+
+
+//Parte de envio de documento
 
 document.addEventListener('submit', sendForm);
 

@@ -17,21 +17,25 @@ const server = app.listen( PORT, ()=>{
     console.log(`Servidor escuchando en el puerto ${PORT}`)
 });
 export const io= new Server(server);
+let comentarios=[];
 
-/*
-let message=[];
+var d = new Date()
+let año=d.getFullYear();
+let mes=d.getMonth()+1;
+let num=d.getDate();
+let dia=new Array(7);
+dia[0]="Domingo";
+dia[1]="Lunes";
+dia[2]="Martes";
+dia[3]="Miercoles";
+dia[4]="Jueves";
+dia[5]="Viernes";
+dia[6]="Sabado";
 
-socket.on('connection',socket=>{
-    console.log('se conecto alguien');
-    socket.emit('Welcome','BIENVENIDO AL SERVIDOR');
-
-    socket.on('message',data=>{
-        message.push(data)
-        io.emit('log',message);
-    })
-});
-*/
-
+let h=d.getHours();
+let m=d.getMinutes();
+/*Establezco la fecha y hora para enviar en comentarios */
+let fechaActual= dia[d.getDay()]+' '+num+'/'+mes+'/'+año+' Hora: '+h+':'+m+'hs'
 
 /*Vistas, rutas */
 app.engine('handlebars',engine())
@@ -73,13 +77,25 @@ app.post('/api/uploadfile', upload.single('image'),(req,res)=>{
 
 //server.on('error', (error)=> console.log('Algo no esta bien... error: '+error))
 
-/*SOCKET */
+/*SOCKET Productos en tiempo real*/
 
 io.on('connection',async socket=>{
     console.log(`Socket ${socket.id} esta conectado ahorita`)
     let products= await manager.getAll();
     socket.emit('updateProduct',products);
+    socket.on('message',data=>{
+        console.log(data)
+    })
 
+});
+
+/* Socket ChatComents*/
+
+io.on('connection',socket=>{
+    socket.on('message',data=>{
+        comentarios.push({id:socket.id,time:fechaActual,message:data})
+        io.emit('messagelog',comentarios)
+    })
 })
 
 
