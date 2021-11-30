@@ -54,7 +54,7 @@ socket.on('messagelog',data=>{
     let com= document.getElementById('Coments');
 
     let comenTario=data.map(m=>{
-        return `<div><span>${m.message.user} dice: ${m.message.message}</span><br/><p>${m.time}</p></div>`
+        return `<div class='divComents'><span><b>${m.message.user}</b> dice: ${m.message.message}</span><br/><p>${m.time}</p></div>`
     }).join('');
     com.innerHTML=comenTario;
 })
