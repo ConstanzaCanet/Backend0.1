@@ -1,10 +1,18 @@
 {{#if products}}
 {{#each products}}
-<div>
-    <p>
-        {{this.body.name}}
-    </p>
-    <img src={{this.body.thumbnail}}>
+<div class='card'>
+    <div class="imgCont">
+        <img src={{this.body.thumbnail}} class='imgCard'>
+    </div>
+
+    <div class='bodyCard'>
+        <h4>
+            {{this.body.name}}
+        </h4>
+        <p>
+            $ {{this.body.price}}
+        </p>
+    </div>
 </div>
 {{/each}}
 {{/if}}

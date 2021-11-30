@@ -13,11 +13,10 @@
 <body>
     <div class='container formul mt-4'>
         <div class="form-container">
-            <div class='row row-cols-sm-2 row-cols-md-2'>
+            <div class='row  row-cols-sm-1 row-cols-md-2'>
 
-                <div class='col conteImg'>
-
-
+                <div class='col p-0 conteImg'>
+                    <img src='./img/bake.jpg'>
 
                 </div>
                 
@@ -46,18 +45,19 @@
 
     <!--Sockets-->
     <div class='container'>
-        <h2>PRODUCTOS EN EL ALMACEN</h2>
+        <h2 class='titleForm'>PRODUCTOS EN EL ALMACEN</h2>
         <div id="productsTable"></div>
     </div>
 
-    <div class='container underline'>
+    <!--Sockets Chat/Coments-->
+    <div class='container formul' style='background-color: rgb(251, 214, 138);'>
         
-            <h3>Comentarios</h3>
+            <h3 class='titleForm'>Comentarios</h3>
         <form>
             <label for="nameClient">Nombre</label>
-            <input class="form-control form-control-lg" type="text" placeholder="user_name" name="user" id='user' required>
+            <input class="inpuForm" type="text" placeholder="user_name" name="user" id='user' required>
             <label for="emailClient">Email</label>
-            <input class="form-control form-control-lg" type="email" placeholder="email" name="emai" id='userEmail' required>
+            <input class="inpuForm" type="email" placeholder="email" name="emai" id='userEmail' required>
 
             <label for="coment">Dejanos tu comentario</label>
             <textarea class="form-control" id="chatComents" rows="3" required></textarea>
